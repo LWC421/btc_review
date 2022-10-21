@@ -15,7 +15,8 @@ export class UsersService {
   ) {}
   async registerUser(userRegisterDTO: UserResiterDTO): Promise<void> {
     const { email, password } = userRegisterDTO;
-    const isUserExist = this.usersRepository.findOneBy({ email });
+    const isUserExist = await this.usersRepository.findOneBy({ email });
+    this.logger.log(isUserExist);
     if (isUserExist) {
       throw new BadRequestException('이미 가입된 메일입니다');
     }

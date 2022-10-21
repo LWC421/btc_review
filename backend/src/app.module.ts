@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
+import { UserEntity } from './users/users.entity';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -19,11 +20,12 @@ const typeOrmModuleOptions = {
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
-    entities: [],
+    entities: [UserEntity],
     synchronize: true,
     autoLoadEntities: true,
     logging: true,
     keepConnectionAlive: true,
+    timezone: 'Z',
   }),
   inject: [ConfigService],
 };
