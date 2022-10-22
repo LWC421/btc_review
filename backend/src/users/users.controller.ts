@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   Logger,
   Post,
   Request,
@@ -31,6 +32,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: '로그인' })
+  @HttpCode(200)
   @ApiBody({ type: UserLoginDto })
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -39,6 +41,7 @@ export class UsersController {
   }
 
   @ApiBearerAuth('AccessToken')
+  @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @Get()
   getProfile(@Request() req) {
