@@ -11,6 +11,7 @@ export class UsersService {
   private readonly logger = new Logger(UsersService.name);
 
   constructor(private usersRepository: UsersRepository) {}
+
   async registerUser(userRegisterDTO: UserResiterDTO): Promise<void> {
     const { email, password } = userRegisterDTO;
     const isExist = await this.usersRepository.existsByEmail(email);
