@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
 import { UserEntity } from './users/users.entity';
+import { CafesModule } from './cafes/cafes.module';
+import { CafeEntity } from './cafes/cafes.entity';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -20,7 +22,7 @@ const typeOrmModuleOptions = {
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
-    entities: [UserEntity],
+    entities: [UserEntity, CafeEntity],
     synchronize: true,
     autoLoadEntities: true,
     logging: true,
@@ -52,6 +54,7 @@ const typeOrmModuleOptions = {
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
     AuthModule,
     UsersModule,
+    CafesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
