@@ -14,7 +14,6 @@ export class AuthService {
   async jwtLogin(data: UserLoginDto) {
     const { email, password } = data;
 
-    console.log(email, password);
     const user = await this.usersRepository.findByEmail(email);
     if (!user) {
       throw new BadRequestException('이메일 또는 비밀번호를 확인해주세요');
