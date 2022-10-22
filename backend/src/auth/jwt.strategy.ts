@@ -1,9 +1,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { UserEntity } from 'src/users/users.entity';
-import { UserLoginDto } from 'src/users/dtos/req/user-login.dto';
 import { UsersRepository } from 'src/users/users.repository';
 import { ExtractJwt } from 'passport-jwt';
 import { Payload } from './jwt.payload';
