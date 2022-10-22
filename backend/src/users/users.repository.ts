@@ -12,4 +12,9 @@ export class UsersRepository extends Repository<UserEntity> {
     const result = await this.findOneBy({ email });
     return result ? true : false;
   }
+
+  async findByEmail(email: string): Promise<UserEntity> {
+    const result = await this.findOneBy({ email });
+    return result;
+  }
 }
