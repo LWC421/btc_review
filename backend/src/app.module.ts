@@ -4,12 +4,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
 import { UserEntity } from './users/users.entity';
 import { CafesModule } from './cafes/cafes.module';
 import { CafeEntity } from './cafes/cafes.entity';
+import { AuthModule } from './auth/auth.module';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -52,9 +52,9 @@ const typeOrmModuleOptions = {
       }),
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
-    AuthModule,
     UsersModule,
     CafesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

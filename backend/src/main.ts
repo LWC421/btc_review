@@ -60,6 +60,16 @@ class Application {
           .setTitle('BTC Review')
           .setDescription('방탈출 리뷰')
           .setVersion('0.0.1')
+          .addBearerAuth(
+            {
+              type: 'http',
+              scheme: 'bearer',
+              bearerFormat: 'jwt',
+              description: 'Access Token',
+              in: 'header',
+            },
+            'AccessToken',
+          )
           .build(),
       ),
     );

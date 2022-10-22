@@ -19,7 +19,7 @@ export class UsersRepository extends Repository<UserEntity> {
   }
 
   async findById(id: string): Promise<UserEntity | null> {
-    const user = await this.findById(id);
+    const user = await this.findOneBy({ id });
 
     return user;
   }

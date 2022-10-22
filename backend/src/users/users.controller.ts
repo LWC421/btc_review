@@ -1,6 +1,16 @@
-import { Body, Controller, Logger, Post } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  Logger,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { UserLoginDto } from './dtos/req/user-login.dto';
 import { UserResiterDTO } from './dtos/user-register.dto';
 import { UsersService } from './users.service';
@@ -21,8 +31,17 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: '로그인' })
+  @ApiBody({ type: UserLoginDto })
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Body() userLoginDTO: UserLoginDto) {
-    return this.authService.jwtLogin(userLoginDTO);
+  async login(@Request() req) {
+    return this.authService.login(req.user);
+  }
+
+  @ApiBearerAuth('AccessToken')
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
