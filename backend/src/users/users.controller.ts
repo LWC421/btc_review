@@ -13,6 +13,7 @@ import {
   ApiBody,
   ApiOperation,
   ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -25,6 +26,7 @@ import { UserEntity } from './users.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
+@ApiTags('User')
 export class UsersController {
   private readonly logger = new Logger(UsersController.name);
 

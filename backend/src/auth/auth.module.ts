@@ -15,7 +15,7 @@ import { LocalStrategy } from './local.strategy';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         secret: config.get<string>('SECRET_KEY'),
-        signOptions: { expiresIn: '1m' },
+        signOptions: { expiresIn: '1y' },
       }),
     }),
   ],
