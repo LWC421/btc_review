@@ -22,6 +22,7 @@ import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { UserLoginDto } from './dtos/req/user-login.dto';
 import { UserResiterDTO } from './dtos/req/user-register.dto';
 import { UserLoginResDto } from './dtos/res/user-login.res.dto';
+import { UserProfileRes } from './dtos/res/user-profile.res.dto';
 import { UserEntity } from './users.entity';
 import { UsersService } from './users.service';
 
@@ -62,7 +63,7 @@ export class UsersController {
   @ApiBearerAuth('AccessToken')
   @ApiResponse({
     status: 200,
-    type: UserEntity,
+    type: UserProfileRes,
     description: '내정보 불러오기 성공',
   })
   @ApiResponse({ status: 401, description: 'token유효 검증 실패' })
