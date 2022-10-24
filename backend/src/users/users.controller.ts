@@ -20,9 +20,9 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { UserLoginDto } from './dtos/req/user-login.dto';
-import { UserResiterDTO } from './dtos/req/user-register.dto';
+import { UserResiterDto } from './dtos/req/user-register.dto';
 import { UserLoginResDto } from './dtos/res/user-login.res.dto';
-import { UserProfileRes } from './dtos/res/user-profile.res.dto';
+import { UserProfileResDto } from './dtos/res/user-profile.res.dto';
 import { UserEntity } from './users.entity';
 import { UsersService } from './users.service';
 
@@ -37,10 +37,10 @@ export class UsersController {
   ) {}
 
   @ApiOperation({ summary: '회원가입' })
-  @ApiResponse({ status: 200, description: '회원가입 성공' })
+  @ApiResponse({ status: 201, description: '회원가입 성공' })
   @ApiResponse({ status: 400, description: '회원가입 실패' })
   @Post()
-  async signup(@Body() userRegisterDTO: UserResiterDTO) {
+  async signup(@Body() userRegisterDTO: UserResiterDto) {
     return await this.usersService.registerUser(userRegisterDTO);
   }
 
@@ -63,7 +63,7 @@ export class UsersController {
   @ApiBearerAuth('AccessToken')
   @ApiResponse({
     status: 200,
-    type: UserProfileRes,
+    type: UserProfileResDto,
     description: '내정보 불러오기 성공',
   })
   @ApiResponse({ status: 401, description: 'token유효 검증 실패' })
