@@ -1,5 +1,5 @@
 import React from "react";
-import * as ButtonStyle from "./Button.style";
+import * as ButtonSt from "./Button.style";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean;
@@ -7,9 +7,9 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ primary = false, children, ...rest }: Props) => {
   return (
-    <ButtonStyle.Button primary={primary} {...rest}>
+    <ButtonSt.Button primary={primary} {...rest}>
       {children}
-    </ButtonStyle.Button>
+    </ButtonSt.Button>
   );
 };
 

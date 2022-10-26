@@ -1,5 +1,5 @@
 import React from "react";
-import * as BoxStyle from "./Box.style";
+import * as BoxSt from "./Box.style";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: "section" | "article" | "div";
@@ -22,11 +22,11 @@ const Box = ({
   };
 
   if (type === "section") {
-    return <BoxStyle.Section {...options}>{children}</BoxStyle.Section>;
+    return <BoxSt.Section {...options}>{children}</BoxSt.Section>;
   } else if (type === "article") {
-    return <BoxStyle.Article {...options}>{children}</BoxStyle.Article>;
+    return <BoxSt.Article {...options}>{children}</BoxSt.Article>;
   } else {
-    return <BoxStyle.Div {...options}>{children}</BoxStyle.Div>;
+    return <BoxSt.Div {...options}>{children}</BoxSt.Div>;
   }
 };
 
