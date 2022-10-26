@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const Wrapper = styled.nav`
   position: absolute;
   bottom: 0;
-  width: 600px;
   height: 45px;
+  width: 600px;
+  max-width: 100vw;
 
   display: flex;
   flex-direction: row;
