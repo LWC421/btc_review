@@ -1,7 +1,7 @@
 import * as NavSt from "./Navigation.style";
 import { BiHome, BiUserCircle, BiCommentAdd, BiSearch } from "react-icons/bi";
 import { withRouter, NextRouter, useRouter } from "next/router";
-import theme from "../../styles/theme";
+import theme from "styles/theme";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   router: NextRouter;

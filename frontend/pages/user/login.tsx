@@ -1,11 +1,11 @@
 import { NextPage } from "next";
-import { Button } from "../../components/common";
+import { Button } from "components/common";
 
 const Login: NextPage = () => {
   return (
     <>
       <div>
-        <Button>테스트</Button>
+        <Button primary>테스트</Button>
       </div>
     </>
   );
