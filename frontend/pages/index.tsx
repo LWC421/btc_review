@@ -7,8 +7,6 @@ const Home: NextPage = () => {
       <Head>
         <title>리뷰</title>
       </Head>
-
-      <div>확인용</div>
     </>
   );
 };
