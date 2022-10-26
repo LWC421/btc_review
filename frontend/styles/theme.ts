@@ -1,7 +1,7 @@
 const theme = {
   color: {
     primary: "rgb(152, 168, 248)",
-    secondary: "rgb(160, 160, 160)",
+    secondary: "rgb(175, 175, 175)",
     normal: "rgb(255, 255, 255)",
   },
   shadow: {
