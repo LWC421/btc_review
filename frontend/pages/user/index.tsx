@@ -11,6 +11,7 @@ const User: NextPage = () => {
     <>
       <Head>
         <title>마이페이지</title>
+        <meta name="description" content="마이페이지입니다." />
       </Head>
       <UserSt.UserWrapper>
         <Box hover onClick={() => router.push("/user/login")}>

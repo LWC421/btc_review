@@ -12,6 +12,7 @@ const Login: NextPage = () => {
     <>
       <Head>
         <title>로그인</title>
+        <meta name="description" content="로그인 페이지입니다." />
       </Head>
       <LoginSt.Wrapper>
         <LoginSt.Form>
