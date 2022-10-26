@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 
 /**
- *
+ * onChange함수에 사용될 handler를 생성하기 위한 함수
  * @param {T} initialValue 초기값
- * @param {(e: any) => T} callback
- * @returns
+ * @param {(e: any) => T} callback 타입<T>를 반환하는 onChange함수
+ * @returns {[<T>, (any) => void, (<T>) => void]} [value, onChange, setValue]
  */
 const useInput = <T>(
   initialValue: T,
