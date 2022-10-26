@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from "react";
 import * as InputSt from "./Input.style";
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
 }
