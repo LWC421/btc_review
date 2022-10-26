@@ -1,15 +1,15 @@
 import Navigation from "./Navigation";
-import * as Lay from "./Layout.style";
+import * as LaySt from "./Layout.style";
 import React from "react";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Layout = ({ children }: Props) => {
   return (
-    <Lay.Main>
+    <LaySt.Main>
       {children}
       <Navigation />
-    </Lay.Main>
+    </LaySt.Main>
   );
 };
 
