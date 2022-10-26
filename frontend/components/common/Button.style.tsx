@@ -13,5 +13,12 @@ export const Button = styled.button<Props>`
   border-radius: 5px;
   :hover {
     cursor: pointer;
+    background-color: ${(props) =>
+      props.primary ? props.theme.color.secondary : props.theme.color.primary};
+    color: white;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function : ease-out-cubic;
+
   }
 `;
