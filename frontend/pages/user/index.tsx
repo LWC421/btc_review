@@ -1,4 +1,4 @@
-import * as UserSt from "./index.style";
+import * as UserSt from "pageStyles/user/index.style";
 import { NextPage } from "next";
 import { Box } from "components/common";
 import { useRouter } from "next/router";
