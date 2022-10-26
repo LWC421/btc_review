@@ -35,8 +35,8 @@ const Login: NextPage = () => {
             onChange={onChangePassword}
           />
           <Button primary>로그인</Button>
-          <Button>회원가입</Button>
         </LoginSt.Form>
+        <Button>회원가입</Button>
       </LoginSt.Wrapper>
     </>
   );
