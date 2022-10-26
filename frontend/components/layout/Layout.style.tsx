@@ -6,7 +6,8 @@ export const Main = styled.main`
   margin: 0;
   padding: 0;
 
-  min-height: calc(100vh - 45px);
+  min-height: 100vh;
+  padding-bottom: 45px;
 
   width: 600px;
   max-width: 100vw;
