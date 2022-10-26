@@ -3,9 +3,9 @@ import { BiHome, BiUserCircle, BiCommentAdd, BiSearch } from "react-icons/bi";
 import { withRouter, NextRouter, useRouter } from "next/router";
 import theme from "../../styles/theme";
 
-type Props = {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   router: NextRouter;
-};
+}
 
 const Navigation = ({ router }: Props) => {
   const route = useRouter();
