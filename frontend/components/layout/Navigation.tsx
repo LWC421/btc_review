@@ -1,4 +1,4 @@
-import * as Nav from "./Navigation.style";
+import * as NavSt from "./Navigation.style";
 import { BiHome, BiUserCircle, BiCommentAdd, BiSearch } from "react-icons/bi";
 import { withRouter, NextRouter, useRouter } from "next/router";
 import theme from "../../styles/theme";
@@ -26,20 +26,20 @@ const Navigation = ({ router }: Props) => {
 
   return (
     <>
-      <Nav.Wrapper>
-        <Nav.Item onClick={() => route.push("/")}>
+      <NavSt.Wrapper>
+        <NavSt.Item onClick={() => route.push("/")}>
           <BiHome fontSize={iconSize} color={iconColor("")} />
-        </Nav.Item>
-        <Nav.Item onClick={() => route.push("/search")}>
+        </NavSt.Item>
+        <NavSt.Item onClick={() => route.push("/search")}>
           <BiSearch fontSize={iconSize} color={iconColor("search")} />
-        </Nav.Item>
-        <Nav.Item onClick={() => route.push("/post")}>
+        </NavSt.Item>
+        <NavSt.Item onClick={() => route.push("/post")}>
           <BiCommentAdd fontSize={iconSize} color={iconColor("post")} />
-        </Nav.Item>
-        <Nav.Item onClick={() => route.push("/user")}>
+        </NavSt.Item>
+        <NavSt.Item onClick={() => route.push("/user")}>
           <BiUserCircle fontSize={iconSize} color={iconColor("user")} />
-        </Nav.Item>
-      </Nav.Wrapper>
+        </NavSt.Item>
+      </NavSt.Wrapper>
     </>
   );
 };
