@@ -39,3 +39,14 @@ export const Div = styled.div<Props>`
     cursor: ${(props) => (props.hover ? "pointer" : "default")};
   }
 `;
+
+export const Form = styled.div<Props>`
+  width: 100%;
+  background-color: ${(props) => props.theme.color.normal};
+  border-radius: 3px;
+  box-shadow: ${boxShadow};
+  padding: ${(props) => props.padding};
+  :hover {
+    cursor: ${(props) => (props.hover ? "pointer" : "default")};
+  }
+`;
