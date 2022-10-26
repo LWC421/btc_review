@@ -8,12 +8,12 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = ({ id, label, children, ...rest }: Props) => {
   return (
-    <>
+    <div>
       {label && <InputSt.Label htmlFor={id}>{label}</InputSt.Label>}
       <InputSt.Input id={id} {...rest}>
         {children}
       </InputSt.Input>
-    </>
+    </div>
   );
 };
 
