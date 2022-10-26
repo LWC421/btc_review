@@ -1,7 +1,8 @@
 const theme = {
   color: {
-    primary: "rgb(128, 128, 128)",
-    secondary: "rgb(200, 200, 200)",
+    primary: "rgb(152, 168, 248)",
+    secondary: "rgb(160, 160, 160)",
+    normal: "rgb(255, 255, 255)",
   },
 };
 
