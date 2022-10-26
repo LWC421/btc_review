@@ -4,6 +4,9 @@ const theme = {
     secondary: "rgb(160, 160, 160)",
     normal: "rgb(255, 255, 255)",
   },
+  shadow: {
+    secondary: "0px 1px 4px rgba(0, 0, 0, 0.15)",
+  },
 };
 
 export default theme;
