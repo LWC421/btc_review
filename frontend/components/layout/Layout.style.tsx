@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  height: 100vh;
+  display: fixed;
+  top: 0;
+  margin: 0;
+  padding: 0;
+
+  min-height: calc(100vh - 45px);
+
   width: 600px;
   max-width: 100vw;
   margin: 0 auto;

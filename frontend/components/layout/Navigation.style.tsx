@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.nav`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 45px;
   width: 600px;
