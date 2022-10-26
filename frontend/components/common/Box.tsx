@@ -2,7 +2,7 @@ import React from "react";
 import * as BoxSt from "./Box.style";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  type?: "section" | "article" | "div" | "form";
+  type?: "section" | "article" | "div";
   hover?: boolean;
   padding?: string;
   onClick?: () => {};
@@ -25,10 +25,8 @@ const Box = ({
     return <BoxSt.Section {...options}>{children}</BoxSt.Section>;
   } else if (type === "article") {
     return <BoxSt.Article {...options}>{children}</BoxSt.Article>;
-  } else if (type === "div") {
-    return <BoxSt.Div {...options}>{children}</BoxSt.Div>;
   } else {
-    return <BoxSt.Form {...options}>{children}</BoxSt.Form>;
+    return <BoxSt.Div {...options}>{children}</BoxSt.Div>;
   }
 };
 
