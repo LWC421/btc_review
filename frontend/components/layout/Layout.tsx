@@ -1,16 +1,15 @@
 import Navigation from "./Navigation";
+import * as Lay from "./Layout.style";
 import React from "react";
 
-type Props = {
-  children?: React.ReactNode;
-};
+interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Layout = ({ children }: Props) => {
   return (
-    <>
-      <main>{children}</main>
-      <Navigation></Navigation>
-    </>
+    <Lay.Main>
+      {children}
+      <Navigation />
+    </Lay.Main>
   );
 };
 
