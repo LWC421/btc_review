@@ -1,19 +1,27 @@
 import * as LoginSt from "pageStyles/user/login.style";
 import { NextPage } from "next";
 import { Button, Input } from "components/common";
-import { useInput } from "hooks";
+import { useAuth, useInput, useServerSideAuth } from "hooks";
 import Head from "next/head";
 import { useMutation } from "react-query";
 import { loginRequest } from "api";
-import { FormEvent } from "react";
+import { FormEvent, useLayoutEffect } from "react";
 import axios, { AxiosError } from "axios";
 import { LoginResponse } from "api/loginRequest";
 import { setToken } from "utils/token";
 import { useRouter } from "next/router";
+import { MyContext } from "types";
 
 const Login: NextPage = () => {
-  const router = useRouter();
+  const [isAuth] = useAuth();
 
+  useLayoutEffect(() => {
+    if (isAuth) {
+      router.replace("/");
+    }
+  });
+
+  const router = useRouter();
   const [email, onChangeEmail] = useInput<string>("");
   const [password, onChangePassword] = useInput<string>("");
 
@@ -24,7 +32,7 @@ const Login: NextPage = () => {
         //로그인 성공
         const { accessToken } = data;
         setToken(accessToken);
-        router.replace("/");
+        window.location.href = "/";
       },
       onError: (error) => {
         //로그인 실패
@@ -71,11 +79,29 @@ const Login: NextPage = () => {
           <Button primary type="submit" loading={isLoading}>
             로그인
           </Button>
-          <Button type="button">회원가입</Button>
+          <Button type="button" onClick={() => router.push("/user/signup")}>
+            회원가입
+          </Button>
         </LoginSt.Form>
       </LoginSt.Wrapper>
     </>
   );
 };
+
+export async function getServerSideProps(context: MyContext) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [isAuth] = await useServerSideAuth(context);
+
+  if (isAuth) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  } else {
+    return { props: {} };
+  }
+}
 
 export default Login;
