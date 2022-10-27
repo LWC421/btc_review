@@ -2,7 +2,7 @@ import myInfoRequest, { MyInfoResponse } from "api/myInfoRequest";
 import axios from "axios";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import User from "types/user";
+import { User } from "types";
 
 /**
  * 로그인이 된 경우인지 판별합니다
