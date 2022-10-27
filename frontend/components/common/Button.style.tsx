@@ -16,6 +16,11 @@ export const Button = styled.button<Props>`
   font-size: 1rem;
   font-weight: bold;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   :hover {
     cursor: pointer;
     background-color: ${(props) => props.theme.color.normal};
