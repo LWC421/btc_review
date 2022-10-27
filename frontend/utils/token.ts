@@ -1,4 +1,5 @@
 import cookie from "react-cookies";
+import customAxios from "./customAxios";
 
 const HTTP_ONLY = process.env.NODE_ENV === "development" ? false : true;
 
@@ -22,4 +23,19 @@ export const setToken = (accessToken: string) => {
  */
 export const getToken = (): string | undefined => {
   return cookie.load("accessToken");
+};
+
+/**
+ * cookie에서 accessToken을 삭제
+ */
+export const deleteToken = () => {
+  delete customAxios.defaults.headers["Authorization"];
+
+  const accessExpires = new Date(Date.now() + 1);
+
+  cookie.save("accessToken", "", {
+    path: "/",
+    expires: accessExpires,
+    httpOnly: HTTP_ONLY,
+  });
 };
