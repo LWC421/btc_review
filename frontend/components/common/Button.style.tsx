@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 type Props = {
   primary: boolean;
@@ -23,5 +23,26 @@ export const Button = styled.button<Props>`
     transition-property: background-color, color;
     transition-duration: 0.3s;
     transition-timing-function: ease-out-cubic;
+  }
+`;
+
+interface SpinnerTypes {
+  animation: ReturnType<typeof keyframes>;
+}
+export const Loading = styled.div<SpinnerTypes>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  animation: ${(props) => props.animation} 1s cubic-bezier(0.2, 0.6, 0.5, 0.1)
+    infinite;
+`;
+
+export const spin = keyframes`
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
   }
 `;
