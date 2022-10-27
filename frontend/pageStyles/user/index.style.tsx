@@ -5,3 +5,9 @@ export const UserWrapper = styled.div`
   height: 100%;
   padding: 10px;
 `;
+
+export const Card = styled.div`
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 5px;
+`;
