@@ -1,5 +1,4 @@
 import cookie from "react-cookies";
-import axiosInstance from "utils/customAxios";
 
 const HTTP_ONLY = process.env.NODE_ENV === "development" ? false : true;
 
@@ -10,13 +9,17 @@ const HTTP_ONLY = process.env.NODE_ENV === "development" ? false : true;
 export const setToken = (accessToken: string) => {
   const accessExpires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365);
 
-  axiosInstance.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${accessToken}`;
-
   cookie.save("accessToken", accessToken, {
     path: "/",
     expires: accessExpires,
     httpOnly: HTTP_ONLY,
   });
+};
+
+/**
+ * cookie에서 accessToken을 가져와 반환합니다
+ * @returns {string | undefined} 존재하지 않을 시 undefined
+ */
+export const getToken = (): string | undefined => {
+  return cookie.load("accessToken");
 };
