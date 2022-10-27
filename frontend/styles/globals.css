@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "notoLight";
+  src: url("../assets/fonts/NotoSansKR-Light.otf");
+}
+@font-face {
+  font-family: "notoBold";
+  src: url("../assets/fonts/NotoSansKR-Bold.otf");
+}
+
 html,
 body,
 #app,
@@ -5,8 +14,9 @@ body,
   padding: 0;
   margin: 0;
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: notoLight;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
 a {
