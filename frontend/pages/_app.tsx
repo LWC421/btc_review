@@ -4,19 +4,27 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import theme from "styles/theme";
 import { Layout } from "components/layout";
+import { RecoilRoot } from "recoil";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
+
   return (
-    <ThemeProvider theme={theme}>
-      <Head>
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
-        <meta charSet="utf-8" name="description" content="리뷰" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>
+          <Head>
+            {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
+            <meta charSet="utf-8" name="description" content="리뷰" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
 
