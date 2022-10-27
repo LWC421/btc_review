@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  display: fixed;
   top: 0;
   margin: 0;
   padding: 0;
