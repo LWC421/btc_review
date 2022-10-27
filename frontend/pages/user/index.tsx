@@ -15,7 +15,7 @@ const User: NextPage = () => {
       </Head>
       <UserSt.UserWrapper>
         <Box hover onClick={() => router.push("/user/login")}>
-          Test
+          <UserSt.Card>로그인 및 회원가입</UserSt.Card>
         </Box>
       </UserSt.UserWrapper>
     </>
