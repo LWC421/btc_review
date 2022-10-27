@@ -5,7 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: "section" | "article" | "div";
   hover?: boolean;
   padding?: string;
-  onClick?: () => {};
+  onClick?: () => void;
 }
 
 const Box = ({
