@@ -22,7 +22,7 @@ const loginRequest = async ({ email, password }: LoginData) => {
     if (axios.isAxiosError(error)) {
       throw new AxiosError(error.response?.data.message);
     } else {
-      throw new Error("서버와의 통신이 원활하지 않습니다");
+      throw new Error("무언가 잘못 되었습니다");
     }
   }
 };
