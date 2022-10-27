@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { Column, Entity, Index } from 'typeorm';
 
@@ -23,9 +23,4 @@ export class UserEntity extends CommonEntity {
   @Column({ type: 'varchar', length: 16, nullable: false })
   @ApiProperty({ example: 'minsu', description: '표시 될 닉네임' })
   nickname: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  @Column({ type: 'int', nullable: false, default: 0 })
-  playCount: number;
 }
