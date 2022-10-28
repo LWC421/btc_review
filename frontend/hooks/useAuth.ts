@@ -22,9 +22,9 @@ const useAuth = (): [boolean, User, boolean] => {
     onError: (error) => {
       //정보 가져오기 실패
       if (axios.isAxiosError(error)) {
-        return;
+        setIsAuth(false);
       } else {
-        return;
+        setIsAuth(false);
       }
     },
   });
