@@ -70,7 +70,7 @@ const Signup: NextPage = () => {
       onSuccess: () => {
         //회원가입 성공
         alert("회원가입을 축하합니다");
-        router.push = "/user/login";
+        router.push("/user/login");
       },
       onError: (error) => {
         //회원가입 실패
