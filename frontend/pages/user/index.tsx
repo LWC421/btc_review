@@ -6,7 +6,7 @@ import Head from "next/head";
 import { useServerSideAuth } from "hooks";
 import { MyContext, User } from "types";
 import { deleteToken } from "utils/token";
-import { BiUserCircle } from "react-icons/bi";
+import { BiExit, BiUserCircle } from "react-icons/bi";
 import theme from "styles/theme";
 
 type Props = {
@@ -43,13 +43,27 @@ const UserPage: NextPage<Props> = ({ isAuth, user }) => {
         )}
         {!isAuth && (
           <Box hover onClick={() => router.push("/user/login")}>
-            <UserSt.Card>로그인 및 회원가입</UserSt.Card>
+            <UserSt.Card>
+              <BiUserCircle
+                fontSize="2.5rem"
+                color={theme.color.secondary}
+                style={{ marginRight: "0.5rem" }}
+              />
+              로그인 및 회원가입
+            </UserSt.Card>
           </Box>
         )}
 
         {isAuth && (
           <Box hover onClick={onClickLogout}>
-            <UserSt.Card>로그아웃</UserSt.Card>
+            <UserSt.Card>
+              <BiExit
+                fontSize="2.5rem"
+                color={theme.color.secondary}
+                style={{ marginRight: "0.5rem" }}
+              />
+              로그아웃
+            </UserSt.Card>
           </Box>
         )}
       </UserSt.UserWrapper>

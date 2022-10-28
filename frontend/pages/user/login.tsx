@@ -64,6 +64,7 @@ const Login: NextPage = () => {
             placeholder="test@gmail.com"
             type="email"
             required={true}
+            maxLength={20}
             value={email}
             onChange={onChangeEmail}
           />
@@ -73,6 +74,7 @@ const Login: NextPage = () => {
             placeholder="password"
             type="password"
             required={true}
+            maxLength={20}
             value={password}
             onChange={onChangePassword}
           />
