@@ -37,3 +37,7 @@ a {
     background: black;
   }
 }
+
+input {
+  font-family: notoLight;
+}
