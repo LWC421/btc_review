@@ -13,6 +13,11 @@ export class UsersRepository extends Repository<UserEntity> {
     return result ? true : false;
   }
 
+  async existsByNickname(nickname: string): Promise<boolean> {
+    const result = await this.findOneBy({ nickname });
+    return result ? true : false;
+  }
+
   async findByEmail(email: string): Promise<UserEntity | null> {
     const result = await this.findOneBy({ email });
     return result;
