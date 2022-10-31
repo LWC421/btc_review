@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDecimal, IsString } from 'class-validator';
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { Column, Entity, Index } from 'typeorm';
+import { DistrictEntity } from 'src/districts/districts.entity';
+import { Column, Entity, Index, JoinTable, ManyToMany } from 'typeorm';
 
 @Index('name', ['name'], { unique: false })
 @Entity({ name: 'CAFE' })
@@ -45,4 +46,21 @@ export class CafeEntity extends CommonEntity {
     default: '/cafe_default.png',
   })
   image: string;
+
+  @ManyToMany(
+    () => DistrictEntity,
+    (district: DistrictEntity) => district.cafes,
+  )
+  @JoinTable({
+    name: 'CAFE_DISTRICT',
+    joinColumn: {
+      name: 'cafe_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'district_id',
+      referencedColumnName: 'id',
+    },
+  })
+  districts: DistrictEntity[];
 }
