@@ -10,6 +10,8 @@ import { UserEntity } from './users/users.entity';
 import { CafesModule } from './cafes/cafes.module';
 import { CafeEntity } from './cafes/cafes.entity';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -52,6 +54,9 @@ const typeOrmModuleOptions = {
       }),
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
+    MulterModule.register({
+      storage: memoryStorage(),
+    }),
     UsersModule,
     CafesModule,
     AuthModule,
