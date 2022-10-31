@@ -6,11 +6,11 @@ import { User } from "types";
 
 /**
  * 로그인이 된 경우인지 판별합니다
- * @returns {[boolean, User, boolean]} [로그인여부, user정보, 로딩여부]
+ * @returns {[boolean, User | null, boolean]} [로그인여부, user정보, 로딩여부]
  */
-const useAuth = (): [boolean, User, boolean] => {
+const useAuth = (): [boolean, User | null, boolean] => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [user, setUser] = useState<User>({ email: "", nickname: "" });
+  const [user, setUser] = useState<User | null>(null);
 
   const { isLoading } = useQuery("myInfo", myInfoRequest, {
     refetchOnWindowFocus: false,
