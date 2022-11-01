@@ -1,4 +1,10 @@
 import { Module } from '@nestjs/common';
+import { DistrictsController } from './districts.controller';
+import { DistrictsRepository } from './districts.repository';
+import { DistrictsService } from './districts.service';
 
-@Module({})
+@Module({
+  controllers: [DistrictsController],
+  providers: [DistrictsService, DistrictsRepository],
+})
 export class DistrictsModule {}
