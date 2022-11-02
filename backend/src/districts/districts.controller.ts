@@ -22,7 +22,7 @@ export class DistrictsController {
     return result;
   }
 
-  @ApiBody({ type: null })
+  @ApiBody({ type: DistrictCreateDto })
   @Post()
   async createDistricts(districtCreateDto: DistrictCreateDto) {
     this.districtsService.createDistricts(districtCreateDto);

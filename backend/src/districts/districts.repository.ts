@@ -19,4 +19,9 @@ export class DistrictsRepository extends Repository<DistrictEntity> {
 
     return result ? true : false;
   }
+
+  async createDistrict(location: string) {
+    const district = this.create({ location });
+    await this.insert(district);
+  }
 }

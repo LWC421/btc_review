@@ -19,6 +19,6 @@ export class DistrictsService {
       throw new BadRequestException('존재하는 지역입니다');
     }
 
-    await this.districtsRepository.save(districtCreateDto);
+    await this.districtsRepository.createDistrict(location);
   }
 }
