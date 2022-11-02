@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { UserResiterDto } from './dtos/req/user-register.dto';
-import * as bcrypt from 'bcrypt';
 import { UsersRepository } from './users.repository';
 
 @Injectable()
@@ -10,7 +9,7 @@ export class UsersService {
   constructor(private usersRepository: UsersRepository) {}
 
   async registerUser(userRegisterDTO: UserResiterDto): Promise<void> {
-    const { email, password, nickname } = userRegisterDTO;
+    const { email, nickname } = userRegisterDTO;
     const isEmailExist = await this.usersRepository.existsByEmail(email);
     if (isEmailExist) {
       throw new BadRequestException('이미 가입된 메일입니다');
@@ -21,10 +20,11 @@ export class UsersService {
     if (isNicknameExist) {
       throw new BadRequestException('중복되는 닉네임입니다');
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await this.usersRepository.save({
-      ...userRegisterDTO,
-      password: hashedPassword,
-    });
+
+    // try {
+    await this.usersRepository.createUser(userRegisterDTO);
+    // } catch (error) {
+    //   throw new BadRequestException('잠시 후 다시 시도해주세요');
+    // }
   }
 }
