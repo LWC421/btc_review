@@ -22,7 +22,7 @@ export class CafesController {
 
   @Post()
   @UseInterceptors(FileInterceptor('image'))
-  async postCafe(@UploadedFile(ImageFilePipe) fileName: string) {
+  async createCafe(@UploadedFile(ImageFilePipe) fileName: string) {
     console.log(fileName);
   }
 }

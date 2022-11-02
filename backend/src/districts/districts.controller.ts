@@ -1,5 +1,12 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { DistrictEntity } from './districts.entity';
 import { DistrictsService } from './districts.service';
 import { DistrictCreateDto } from './dtos/req/district-create.dto';
@@ -22,9 +29,16 @@ export class DistrictsController {
     return result;
   }
 
+  @ApiOperation({ summary: '지역정보 생성' })
   @ApiBody({ type: DistrictCreateDto })
+  @ApiResponse({ status: 201, description: '지역정보 생성 성공' })
+  @ApiResponse({ status: 400, description: '지역정보 생성 실패' })
+  @ApiResponse({ status: 401, description: 'token유효 검증 실패' })
+  @ApiBearerAuth()
+  @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async createDistricts(districtCreateDto: DistrictCreateDto) {
+  async createDistrict(districtCreateDto: DistrictCreateDto) {
     this.districtsService.createDistricts(districtCreateDto);
   }
 }
