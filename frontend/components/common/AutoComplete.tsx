@@ -84,7 +84,7 @@ const AutoComplete = ({
   const onBlur = () => {
     timerId = setTimeout(() => {
       setIsFocus(false);
-    }, 100);
+    }, 150);
   };
 
   useEffect(() => {
