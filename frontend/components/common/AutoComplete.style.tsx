@@ -32,6 +32,6 @@ export const Item = styled.li`
 
   font-size: 1.25rem;
   :hover {
-    background-color: ${(props) => props.theme.color.secondary};
+    background-color: ${(props) => props.theme.color.primary};
   }
 `;

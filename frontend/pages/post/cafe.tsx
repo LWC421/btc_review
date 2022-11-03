@@ -21,6 +21,7 @@ const dummyDistrict = [
   "대구대학교",
   "대구대학교 입구",
   "대구대학교 정문",
+  "동성로(2호점)",
 ];
 
 const Cafe: NextPage = () => {
@@ -39,6 +40,8 @@ const Cafe: NextPage = () => {
     }
   );
   const [description, onChangeDescription] = useInput<string>("");
+
+  const [district, setDistrict] = useState<string>("");
 
   return (
     <CafeSt.Wrapper>
@@ -77,6 +80,8 @@ const Cafe: NextPage = () => {
           maxLength={20}
           required={true}
           items={dummyDistrict}
+          value={district}
+          setValue={setDistrict}
         />
       </CafeSt.Form>
     </CafeSt.Wrapper>

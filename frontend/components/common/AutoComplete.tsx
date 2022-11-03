@@ -1,11 +1,13 @@
 import { useInput } from "hooks";
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { useState, useRef } from "react";
 import * as AutoCompleteSt from "./AutoComplete.style";
 import Input, { Props as InputProps } from "./Input";
 
 interface Props extends InputProps {
   items: Array<any>;
+  value: any;
+  setValue: (value: any) => void;
 }
 
 //참고 사이트
@@ -15,12 +17,16 @@ const AutoComplete = ({
   label,
   warning,
   warningMessage,
+  value,
+  setValue,
   items,
   ...rest
 }: Props) => {
   let timerId: ReturnType<typeof setTimeout>;
   const inputRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number>(0);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [completeList, setCompleteList] = useState<Array<any>>(items);
 
   //화면크기가 변경될때 Item의 크기를 변경시켜주기
   useEffect(() => {
@@ -42,32 +48,36 @@ const AutoComplete = ({
       });
   }, []);
 
-  const [isFocus, setIsFocus] = useState<boolean>(false);
-
-  const [completeList, setCompleteList] = useState<Array<any>>([]);
-  const [value, onChangeValue, setValue] = useInput<string>("", (e) => {
-    let viewItems: Array<any> = [];
-
-    if (e.target.value.length > 0) {
-      //쓰여진 글자가 있으면
-      //정규식으로 filtering
-      try {
-        const regexp = new RegExp(`^${e.target.value}`, "i");
-        //filtering된 아이템만 보여주기
-        viewItems = items.filter((item) => regexp.test(item)).sort();
-      } catch (error) {
-        viewItems = [];
-      }
-    }
-
-    setCompleteList(viewItems);
-
-    return e.target.value;
-  });
-
   const onClickComplete = (value: any) => {
     setValue(value);
     setCompleteList([]);
+  };
+
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    let viewItems: Array<any> = [];
+
+    if (value.length > 0) {
+      //특수문자제거
+      const specialExp = new RegExp(
+        /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/
+      );
+      if (specialExp.test(value)) {
+        value = value.slice(0, value.length - 1);
+      }
+    }
+
+    setValue(value);
+
+    //정규식으로 filtering
+    try {
+      const regexp = new RegExp(`^${value}`, "i");
+      //filtering된 아이템만 보여주기
+      viewItems = items.filter((item) => regexp.test(item)).sort();
+    } catch (error) {
+      viewItems = [];
+    }
+    setCompleteList(viewItems);
   };
 
   //focus를 벗어날 때 아이템 안보이게 하기
@@ -89,7 +99,7 @@ const AutoComplete = ({
         warning={warning}
         warningMessage={warningMessage}
         value={value}
-        onChange={onChangeValue}
+        onChange={onChangeInput}
         onFocus={() => setIsFocus(true)}
         onBlur={onBlur}
         {...rest}
