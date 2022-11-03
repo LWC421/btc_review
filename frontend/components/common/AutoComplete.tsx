@@ -79,7 +79,6 @@ const AutoComplete = ({
 
   return (
     <AutoCompleteSt.Wrapper ref={inputRef}>
-      {width}
       <Input
         id={id}
         label={label}
