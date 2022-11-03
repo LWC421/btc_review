@@ -1,7 +1,7 @@
 import * as LoginSt from "pageStyles/user/login.style";
 import { NextPage } from "next";
 import { Button, Input } from "components/common";
-import { useAuth, useInput, useServerSideAuth } from "hooks";
+import { useInput, useServerSideAuth } from "hooks";
 import Head from "next/head";
 import { useMutation } from "react-query";
 import { loginRequest } from "api";
