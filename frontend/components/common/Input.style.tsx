@@ -11,3 +11,9 @@ export const Input = styled.input`
 export const Label = styled.label`
   font-size: 0.75rem;
 `;
+
+export const Warning = styled.div`
+  width: 100%;
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.color.primary};
+`;
