@@ -1,4 +1,4 @@
-import { AutoComplete, Input } from "components/common";
+import { AutoComplete, Button, Input } from "components/common";
 import { useInput } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -25,6 +25,8 @@ const dummyDistrict = [
 ];
 
 const Cafe: NextPage = () => {
+  const districtItems = dummyDistrict;
+
   const router = useRouter();
 
   const [name, onChangeName, _, isValidName] = useInput<string>(
@@ -42,6 +44,18 @@ const Cafe: NextPage = () => {
   const [description, onChangeDescription] = useInput<string>("");
 
   const [district, setDistrict] = useState<string>("");
+  const [districtList, setDistrictList] = useState<Array<string>>([]);
+
+  //지역 추가 버튼을 누를때 불릴 event
+  const onClickDicstrict = () => {
+    //존재하는 지역에 대해서만 추가할 수 있게 만듦
+    if (districtItems.includes(district)) {
+      setDistrictList([...districtList, district]);
+      setDistrict("");
+    } else {
+      alert("존재하지 않는 지역입니다");
+    }
+  };
 
   return (
     <CafeSt.Wrapper>
@@ -71,18 +85,27 @@ const Cafe: NextPage = () => {
           value={description}
           onChange={onChangeDescription}
         />
-
-        <AutoComplete
-          id="district"
-          placeholder="홍대"
-          label="지역"
-          type="text"
-          maxLength={20}
-          required={true}
-          items={dummyDistrict}
-          value={district}
-          setValue={setDistrict}
-        />
+        <CafeSt.Row>
+          <CafeSt.Left>
+            <AutoComplete
+              id="district"
+              placeholder="홍대"
+              label="지역"
+              type="text"
+              maxLength={20}
+              required={true}
+              items={districtItems}
+              value={district}
+              setValue={setDistrict}
+            />
+          </CafeSt.Left>
+          <CafeSt.Right>
+            <Button primary type="button" onClick={onClickDicstrict}>
+              추가
+            </Button>
+          </CafeSt.Right>
+        </CafeSt.Row>
+        {districtList}
       </CafeSt.Form>
     </CafeSt.Wrapper>
   );
