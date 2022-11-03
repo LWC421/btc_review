@@ -10,12 +10,14 @@ type ItemWrapperProps = {
 };
 
 export const ItemWrapper = styled.ul<ItemWrapperProps>`
-  width: ${(props) => props.width};
+  width: ${(props) => props.width}px;
   height: 10rem;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0;
   margin: 0;
+
+  position: absolute;
 `;
 
 export const Item = styled.li`
