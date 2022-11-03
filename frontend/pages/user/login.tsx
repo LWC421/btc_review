@@ -5,7 +5,7 @@ import { useAuth, useInput, useServerSideAuth } from "hooks";
 import Head from "next/head";
 import { useMutation } from "react-query";
 import { loginRequest } from "api";
-import { FormEvent, useLayoutEffect } from "react";
+import { FormEvent } from "react";
 import axios, { AxiosError } from "axios";
 import { LoginResponse } from "api/loginRequest";
 import { setToken } from "utils/token";
@@ -13,14 +13,6 @@ import { useRouter } from "next/router";
 import { MyContext } from "types";
 
 const Login: NextPage = () => {
-  const [isAuth] = useAuth();
-
-  useLayoutEffect(() => {
-    if (isAuth) {
-      router.replace("/");
-    }
-  });
-
   const router = useRouter();
   const [email, onChangeEmail] = useInput<string>("");
   const [password, onChangePassword] = useInput<string>("");
@@ -37,6 +29,7 @@ const Login: NextPage = () => {
       onError: (error) => {
         //로그인 실패
         if (axios.isAxiosError(error)) {
+          console.log(error);
           alert(error.message);
         } else {
           alert(error);
@@ -67,6 +60,7 @@ const Login: NextPage = () => {
             maxLength={20}
             value={email}
             onChange={onChangeEmail}
+            autoFocus={true}
           />
           <Input
             id="password"

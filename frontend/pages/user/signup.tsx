@@ -110,56 +110,50 @@ const Signup: NextPage = () => {
             required={true}
             value={email}
             onChange={onChangeEmail}
+            warning={!isValidEmail}
+            warningMessage="이메일 형식이 올바르지 않습니다"
           />
-          {!isValidEmail && (
-            <SignupSt.Warning>이메일 형식이 올바르지 않습니다</SignupSt.Warning>
-          )}
         </div>
         <div>
           <Input
             id="password"
             type="password"
-            placeholder="password123"
+            placeholder="패스워드"
             label="패스워드"
             maxLength={20}
             required={true}
             value={password}
             onChange={onChangePassword}
+            warning={!isValidPassword}
+            warningMessage="패스워드는 8글자 이상, 숫자와 문자를 포함해야합니다"
           />
-          {!isValidPassword && (
-            <SignupSt.Warning>
-              패스워드는 8글자 이상, 숫자와 문자를 포함해야합니다
-            </SignupSt.Warning>
-          )}
         </div>
         <div>
           <Input
             id="passwordCheck"
             type="password"
-            placeholder="password123"
+            placeholder="패스워드 확인"
             label="패스워드 확인"
             maxLength={20}
             required={true}
             value={passwordCheck}
             onChange={onChangePasswordCheck}
+            warning={!isValidPasswordCheck}
+            warningMessage="패스워드가 일치하지 않습니다"
           />
-          {!isValidPasswordCheck && (
-            <SignupSt.Warning>패스워드가 일치하지 않습니다</SignupSt.Warning>
-          )}
         </div>
         <div>
           <Input
             id="nickname"
-            placeholder="물고기1"
+            placeholder="닉네임"
             label="닉네임"
             maxLength={10}
             required={true}
             value={nickname}
             onChange={onChangeNickname}
+            warning={!isValidNickname}
+            warningMessage="닉네임은 3글자 이상이여야합니다"
           />
-          {!isValidNickname && (
-            <SignupSt.Warning>닉네임은 3글자 이상이여야합니다</SignupSt.Warning>
-          )}
         </div>
         <Button primary type="submit" loading={isLoading}>
           회원가입
