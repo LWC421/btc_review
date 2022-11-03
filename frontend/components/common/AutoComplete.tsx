@@ -51,9 +51,13 @@ const AutoComplete = ({
     if (e.target.value.length > 0) {
       //쓰여진 글자가 있으면
       //정규식으로 filtering
-      const regexp = new RegExp(`^${e.target.value}`, "i");
-      //filtering된 아이템만 보여주기
-      viewItems = items.filter((item) => regexp.test(item)).sort();
+      try {
+        const regexp = new RegExp(`^${e.target.value}`, "i");
+        //filtering된 아이템만 보여주기
+        viewItems = items.filter((item) => regexp.test(item)).sort();
+      } catch (error) {
+        viewItems = [];
+      }
     }
 
     setCompleteList(viewItems);
