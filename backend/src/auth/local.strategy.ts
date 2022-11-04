@@ -14,7 +14,9 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     const user = await this.authService.validateUser(email, password);
 
     if (!user) {
-      throw new UnauthorizedException('해당하는 유저가 없습니다');
+      throw new UnauthorizedException(
+        '이메일 또는 패스워드가 일치하지않습니다',
+      );
     }
 
     return user;
