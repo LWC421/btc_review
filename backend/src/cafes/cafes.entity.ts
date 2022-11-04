@@ -39,6 +39,11 @@ export class CafeEntity extends CommonEntity {
   longitude: number;
 
   @IsString()
+  @Column({ type: 'varchar', length: 120, nullable: true })
+  @ApiProperty({ example: '설명내용', description: '설명' })
+  description: string;
+
+  @IsString()
   @Column({
     type: 'varchar',
     length: 50,
