@@ -7,9 +7,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { DistrictEntity } from './districts.entity';
 import { DistrictsService } from './districts.service';
 import { DistrictCreateDto } from './dtos/req/district-create.dto';
+import { DistrictGetResDto } from './dtos/res/district-get.res.dto';
 
 @Controller('districts')
 @ApiTags('Districts')
@@ -19,7 +19,7 @@ export class DistrictsController {
   @ApiOperation({ summary: '지역정보 불러오기' })
   @ApiResponse({
     status: 200,
-    type: Array<DistrictEntity>,
+    type: DistrictGetResDto,
     description: '지역정보 불러오기성공',
   })
   @ApiResponse({ status: 400, description: '지역정보 불러오기실패' })
@@ -39,6 +39,6 @@ export class DistrictsController {
   @UseGuards(JwtAuthGuard)
   @Post()
   async createDistrict(districtCreateDto: DistrictCreateDto) {
-    this.districtsService.createDistricts(districtCreateDto);
+    await this.districtsService.createDistrict(districtCreateDto);
   }
 }

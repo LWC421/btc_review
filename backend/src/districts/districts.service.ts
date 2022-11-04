@@ -12,7 +12,7 @@ export class DistrictsService {
     return result;
   }
 
-  async createDistricts(districtCreateDto: DistrictCreateDto) {
+  async createDistrict(districtCreateDto: DistrictCreateDto) {
     const { location } = districtCreateDto;
     const isExists = await this.districtsRepository.existsByLocation(location);
     if (isExists) {
