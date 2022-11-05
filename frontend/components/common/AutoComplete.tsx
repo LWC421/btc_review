@@ -1,4 +1,3 @@
-import { useInput } from "hooks";
 import React, { ChangeEvent, useEffect } from "react";
 import { useState, useRef } from "react";
 import * as AutoCompleteSt from "./AutoComplete.style";
@@ -58,12 +57,11 @@ const AutoComplete = ({
     let viewItems: Array<any> = [];
 
     if (value.length > 0) {
-      //특수문자제거
       const specialExp = new RegExp(
-        /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/
+        /[\{\}\[\]\/?.,;:|*~`!^\-_+<>@\#$%&\\\=\'\"]/
       );
       if (specialExp.test(value)) {
-        value = value.slice(0, value.length - 1);
+        value = value.replace(specialExp, "");
       }
     }
 
@@ -71,9 +69,10 @@ const AutoComplete = ({
 
     //정규식으로 filtering
     try {
-      const regexp = new RegExp(`^${value}`, "i");
+      const expString = value.replaceAll("(", `\\(`).replaceAll(")", `\\)`);
+      const regexp = new RegExp(`^.*${expString}.*`, "i");
       //filtering된 아이템만 보여주기
-      viewItems = items.filter((item) => regexp.test(item)).sort();
+      viewItems = items.filter((item) => regexp.test(item));
     } catch (error) {
       viewItems = [];
     }
