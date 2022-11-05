@@ -30,8 +30,8 @@ const Navigation = ({ router }: Props) => {
         <NavSt.Item onClick={() => route.push("/")}>
           <BiHome fontSize={iconSize} color={iconColor("")} />
         </NavSt.Item>
-        <NavSt.Item onClick={() => route.push("/search")}>
-          <BiSearch fontSize={iconSize} color={iconColor("search")} />
+        <NavSt.Item onClick={() => route.push("/cafe")}>
+          <BiSearch fontSize={iconSize} color={iconColor("cafe")} />
         </NavSt.Item>
         <NavSt.Item onClick={() => route.push("/post")}>
           <BiCommentAdd fontSize={iconSize} color={iconColor("post")} />

@@ -11,6 +11,7 @@ import * as expressSession from 'express-session';
 import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
 import { AppModule } from './app.module';
+import * as path from 'path';
 
 class Application {
   private logger = new Logger(Application.name);
@@ -100,6 +101,9 @@ class Application {
     this.server.useGlobalInterceptors(
       new ClassSerializerInterceptor(this.server.get(Reflector)),
     );
+    this.server.useStaticAssets(path.join(__dirname, 'uploads'), {
+      prefix: '/image',
+    });
   }
 
   async bootstrap() {

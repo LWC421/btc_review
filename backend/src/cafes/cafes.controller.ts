@@ -1,5 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
+import { ImageFilePipe } from 'src/common/pipes/imageFile.pipe';
 import { CafesService } from './cafes.service';
 
 @Controller('cafes')
@@ -10,5 +18,11 @@ export class CafesController {
   @Get()
   async getAllCafe() {
     return this.cafesService.getAllCafe();
+  }
+
+  @Post()
+  @UseInterceptors(FileInterceptor('image'))
+  async createCafe(@UploadedFile(ImageFilePipe) fileName: string) {
+    console.log(fileName);
   }
 }

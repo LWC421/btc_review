@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DistrictEntity } from 'src/districts/districts.entity';
 import { CafesController } from './cafes.controller';
 import { CafeEntity } from './cafes.entity';
 import { CafesRepository } from './cafes.repository';
 import { CafesService } from './cafes.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CafeEntity])],
+  imports: [TypeOrmModule.forFeature([CafeEntity, DistrictEntity])],
   controllers: [CafesController],
   providers: [CafesService, CafesRepository],
   exports: [CafesRepository],

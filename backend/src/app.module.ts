@@ -10,6 +10,10 @@ import { UserEntity } from './users/users.entity';
 import { CafesModule } from './cafes/cafes.module';
 import { CafeEntity } from './cafes/cafes.entity';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+import { DistrictsModule } from './districts/districts.module';
+import { DistrictEntity } from './districts/districts.entity';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -22,7 +26,7 @@ const typeOrmModuleOptions = {
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
-    entities: [UserEntity, CafeEntity],
+    entities: [UserEntity, CafeEntity, DistrictEntity],
     synchronize: true,
     autoLoadEntities: true,
     logging: true,
@@ -52,9 +56,13 @@ const typeOrmModuleOptions = {
       }),
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
+    MulterModule.register({
+      storage: memoryStorage(),
+    }),
     UsersModule,
     CafesModule,
     AuthModule,
+    DistrictsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
