@@ -23,6 +23,8 @@ const AutoComplete = ({
 }: Props) => {
   let timerId: ReturnType<typeof setTimeout>;
   const inputRef = useRef<HTMLDivElement>(null);
+  const [highlightExp, setHighlightExp] = useState<RegExp>(new RegExp(""));
+
   const [width, setWidth] = useState<number>(0);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [completeList, setCompleteList] = useState<Array<any>>(items);
@@ -71,6 +73,7 @@ const AutoComplete = ({
     try {
       const expString = value.replaceAll("(", `\\(`).replaceAll(")", `\\)`);
       const regexp = new RegExp(`^.*${expString}.*`, "i");
+      setHighlightExp(new RegExp(`(${value})`, "gi"));
       //filtering된 아이템만 보여주기
       viewItems = items.filter((item) => regexp.test(item));
     } catch (error) {
@@ -105,13 +108,23 @@ const AutoComplete = ({
       />
       {completeList.length > 0 && isFocus && (
         <AutoCompleteSt.ItemWrapper width={width}>
-          {completeList.map((item) => {
+          {completeList.map((item: string) => {
             return (
               <AutoCompleteSt.Item
                 key={item}
                 onClick={() => onClickComplete(item)}
               >
-                {item}
+                {item.split(highlightExp).map((text, index) => {
+                  const render =
+                    text === value ? (
+                      <AutoCompleteSt.Highlight key={text + index}>
+                        {text}
+                      </AutoCompleteSt.Highlight>
+                    ) : (
+                      text
+                    );
+                  return render;
+                })}
               </AutoCompleteSt.Item>
             );
           })}

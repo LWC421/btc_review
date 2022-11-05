@@ -35,3 +35,7 @@ export const Item = styled.li`
     background-color: ${(props) => props.theme.color.primary};
   }
 `;
+
+export const Highlight = styled.span`
+  color: ${(props) => props.theme.color.primary};
+`;
