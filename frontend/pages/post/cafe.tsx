@@ -1,9 +1,9 @@
-import { AutoComplete, Button, Input } from "components/common";
+import { AutoComplete, Button, Input, TextArea } from "components/common";
 import { useInput } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as CafeSt from "pageStyles/post/cafe.style";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const dummyDistrict = [
   "대구",
@@ -41,7 +41,10 @@ const Cafe: NextPage = () => {
       }
     }
   );
-  const [description, onChangeDescription] = useInput<string>("");
+  const [description, setDescription] = useState<string>("");
+  const onChangeDescription = (e: any) => {
+    setDescription(e.target.value);
+  };
 
   const [district, setDistrict] = useState<string>("");
   const [districtList, setDistrictList] = useState<Array<string>>([]);
@@ -75,15 +78,14 @@ const Cafe: NextPage = () => {
           warningMessage="카페명은 1글자 이상이어야합니다"
         />
 
-        <Input
+        <TextArea
           id="description"
           placeholder="카페에 대한 설명"
           label="설명"
-          type="text"
-          maxLength={240}
-          required={false}
+          maxlength={240}
           value={description}
           onChange={onChangeDescription}
+          rows={10}
         />
         <CafeSt.Row>
           <CafeSt.Left>
@@ -97,6 +99,7 @@ const Cafe: NextPage = () => {
               items={districtItems}
               value={district}
               setValue={setDistrict}
+              empty={"표시할 항목이없습니다"}
             />
           </CafeSt.Left>
           <CafeSt.Right>
