@@ -7,6 +7,7 @@ interface Props extends InputProps {
   items: Array<any>;
   value: any;
   setValue: (value: any) => void;
+  empty?: React.ReactNode;
 }
 
 //참고 사이트
@@ -19,6 +20,7 @@ const AutoComplete = ({
   value,
   setValue,
   items,
+  empty,
   ...rest
 }: Props) => {
   let timerId: ReturnType<typeof setTimeout>;
@@ -106,28 +108,34 @@ const AutoComplete = ({
         onBlur={onBlur}
         {...rest}
       />
-      {completeList.length > 0 && isFocus && (
+      {isFocus && (
         <AutoCompleteSt.ItemWrapper width={width}>
-          {completeList.map((item: string) => {
-            return (
-              <AutoCompleteSt.Item
-                key={item}
-                onClick={() => onClickComplete(item)}
-              >
-                {item.split(highlightExp).map((text, index) => {
-                  const render =
-                    text === value ? (
-                      <AutoCompleteSt.Highlight key={text + index}>
-                        {text}
-                      </AutoCompleteSt.Highlight>
-                    ) : (
-                      text
-                    );
-                  return render;
-                })}
-              </AutoCompleteSt.Item>
-            );
-          })}
+          {completeList.length === 0 && (
+            <AutoCompleteSt.Emtpy>
+              {empty ?? "표시할 항목이 없습니다"}
+            </AutoCompleteSt.Emtpy>
+          )}
+          {completeList.length > 0 &&
+            completeList.map((item: string) => {
+              return (
+                <AutoCompleteSt.Item
+                  key={item}
+                  onClick={() => onClickComplete(item)}
+                >
+                  {item.split(highlightExp).map((text, index) => {
+                    const render =
+                      text === value ? (
+                        <AutoCompleteSt.Highlight key={text + index}>
+                          {text}
+                        </AutoCompleteSt.Highlight>
+                      ) : (
+                        text
+                      );
+                    return render;
+                  })}
+                </AutoCompleteSt.Item>
+              );
+            })}
         </AutoCompleteSt.ItemWrapper>
       )}
     </AutoCompleteSt.Wrapper>

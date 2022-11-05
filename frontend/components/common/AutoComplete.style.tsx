@@ -39,3 +39,17 @@ export const Item = styled.li`
 export const Highlight = styled.span`
   color: ${(props) => props.theme.color.primary};
 `;
+
+export const Emtpy = styled.li`
+  width: 100%;
+  height: 4rem;
+  padding-left: 0.2rem;
+
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+
+  font-size: 1.25rem;
+
+  background-color: ${(props) => props.theme.color.normal};
+`;
