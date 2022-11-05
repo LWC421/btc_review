@@ -72,7 +72,7 @@ const AutoComplete = ({
     //정규식으로 filtering
     try {
       const expString = value.replaceAll("(", `\\(`).replaceAll(")", `\\)`);
-      const regexp = new RegExp(`^.*${expString}.*`, "i");
+      const regexp = new RegExp(`^.*${expString}.*`, "gi");
       setHighlightExp(new RegExp(`(${expString})`, "gi"));
       //filtering된 아이템만 보여주기
       viewItems = items.filter((item) => regexp.test(item));
