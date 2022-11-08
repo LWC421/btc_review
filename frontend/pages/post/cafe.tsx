@@ -1,5 +1,6 @@
 import { AutoComplete, Button, Input, TextArea } from "components/common";
 import { useInput } from "hooks";
+import { useAlert } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as CafeSt from "pageStyles/post/cafe.style";
@@ -56,7 +57,7 @@ const Cafe: NextPage = () => {
       setDistrictList([...districtList, district]);
       setDistrict("");
     } else {
-      alert("존재하지 않는 지역입니다");
+      useAlert({ type: "error", message: "존재하지 않는 지역입니다" });
     }
   };
 

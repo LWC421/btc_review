@@ -1,7 +1,8 @@
 import { signupRequest } from "api";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { Button, Input } from "components/common";
 import { useInput } from "hooks";
+import { useAlert } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as SignupSt from "pageStyles/user/signup.style";
@@ -69,16 +70,12 @@ const Signup: NextPage = () => {
     {
       onSuccess: () => {
         //회원가입 성공
-        alert("회원가입을 축하합니다");
+        useAlert({ type: "alram", message: "회원가입을 축하합니다" });
         router.push("/user/login");
       },
       onError: (error) => {
         //회원가입 실패
-        if (axios.isAxiosError(error)) {
-          alert(error.message);
-        } else {
-          alert(error);
-        }
+        useAlert({ type: "error", message: error });
       },
     }
   );
@@ -93,7 +90,7 @@ const Signup: NextPage = () => {
     ) {
       mutate();
     } else {
-      alert("입력 정보를 확인해주세요");
+      useAlert({ type: "error", message: "입력 정보를 확인해주세요" });
     }
   };
 

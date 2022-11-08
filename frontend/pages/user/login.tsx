@@ -1,7 +1,7 @@
 import * as LoginSt from "pageStyles/user/login.style";
 import { NextPage } from "next";
 import { Button, Input } from "components/common";
-import { useInput, useServerSideAuth } from "hooks";
+import { useAlert, useInput, useServerSideAuth } from "hooks";
 import Head from "next/head";
 import { useMutation } from "react-query";
 import { loginRequest } from "api";
@@ -28,12 +28,7 @@ const Login: NextPage = () => {
       },
       onError: (error) => {
         //로그인 실패
-        if (axios.isAxiosError(error)) {
-          console.log(error);
-          alert(error.message);
-        } else {
-          alert(error);
-        }
+        useAlert({ type: "error", message: error });
       },
     }
   );
