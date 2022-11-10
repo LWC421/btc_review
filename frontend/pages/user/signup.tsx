@@ -12,50 +12,63 @@ import { useMutation } from "react-query";
 const Signup: NextPage = () => {
   const router = useRouter();
 
-  const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
-  const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const [isValidPasswordCheck, setIsValidPasswordCheck] =
     useState<boolean>(true);
-  const [isValidNickname, setIsValidNickname] = useState<boolean>(true);
 
-  const [email, onChangeEmail] = useInput<string>("", (e) => {
-    const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    if (!regex.test(e.target.value)) {
-      setIsValidEmail(false);
-    } else {
-      setIsValidEmail(true);
+  const [email, onChangeEmail, _, isValidEmail] = useInput<string>(
+    "",
+    null,
+    false,
+    (email) => {
+      const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+      if (!regex.test(email)) {
+        return false;
+      } else {
+        return true;
+      }
     }
+  );
 
-    return e.target.value;
-  });
-
-  const [password, onChangePassword] = useInput<string>("", (e) => {
-    const numbRegex = new RegExp("[0-9]");
-    const charRegex = new RegExp("[a-zA-Z]");
-    if (
-      numbRegex.test(e.target.value) &&
-      charRegex.test(e.target.value) &&
-      e.target.value.length >= 8
-    ) {
-      setIsValidPassword(true);
-    } else {
-      setIsValidPassword(false);
+  const [password, onChangePassword, __, isValidPassword] = useInput<string>(
+    "",
+    null,
+    false,
+    (password) => {
+      const numbRegex = new RegExp("[0-9]");
+      const charRegex = new RegExp("[a-zA-Z]");
+      if (
+        numbRegex.test(password) &&
+        charRegex.test(password) &&
+        password.length >= 8
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
-
-    return e.target.value;
-  });
+  );
 
   const [passwordCheck, onChangePasswordCheck] = useInput<string>("");
 
-  const [nickname, onChangeNickname] = useInput<string>("", (e) => {
-    if (e.target.value.length < 3) {
-      setIsValidNickname(false);
-    } else {
-      setIsValidNickname(true);
+  const [nickname, onChangeNickname, ___, isValidNickname] = useInput<string>(
+    "",
+    null,
+    false,
+    (nickname) => {
+      if (nickname.length < 3) {
+        return false;
+      } else {
+        return true;
+      }
     }
+  );
 
-    return e.target.value;
-  });
+  const disabled = !(
+    isValidEmail &&
+    isValidPassword &&
+    isValidPasswordCheck &&
+    isValidNickname
+  );
 
   useEffect(() => {
     if (password !== passwordCheck) {
@@ -148,7 +161,7 @@ const Signup: NextPage = () => {
           warningMessage="닉네임은 3글자 이상이여야합니다"
         />
 
-        <Button primary type="submit" loading={isLoading}>
+        <Button primary type="submit" loading={isLoading} disabled={disabled}>
           회원가입
         </Button>
       </SignupSt.Form>
