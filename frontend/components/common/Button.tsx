@@ -20,7 +20,11 @@ const Button = ({
   const isPrimary = primary && !disabled;
 
   return (
-    <ButtonSt.Button primary={isPrimary} disabled={loading} {...rest}>
+    <ButtonSt.Button
+      primary={isPrimary}
+      disabled={loading || disabled}
+      {...rest}
+    >
       {loading && (
         <ButtonSt.Loading animation={ButtonSt.spin}>
           <FaSpinner fontSize="inherit" />

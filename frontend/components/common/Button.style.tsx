@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 type Props = {
   primary: boolean;
+  disabled: boolean;
 };
 
 export const Button = styled.button<Props>`
@@ -22,9 +23,10 @@ export const Button = styled.button<Props>`
   align-items: center;
 
   :hover {
-    cursor: pointer;
-    background-color: black;
-    color: white;
+    cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+    background-color: ${(props) =>
+      !props.disabled && props.theme.color.inverseBackground};
+    color: ${(props) => !props.disabled && props.theme.color.inverse};
     border: 2px solid black;
   }
 
