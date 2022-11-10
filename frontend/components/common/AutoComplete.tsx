@@ -53,7 +53,7 @@ const AutoComplete = ({
 
   const onClickComplete = (value: any) => {
     setValue(value);
-    setCompleteList([]);
+    setCompleteList(items);
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
