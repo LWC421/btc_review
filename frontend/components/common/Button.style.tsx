@@ -23,14 +23,14 @@ export const Button = styled.button<Props>`
 
   :hover {
     cursor: pointer;
-    // background-color: ${(props) => props.theme.color.normal};
     background-color: black;
     color: white;
     border: 2px solid black;
-    transition-property: background-color, color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out-cubic;
   }
+
+  transition-property: background-color, color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out-cubic;
 `;
 
 interface SpinnerTypes {
