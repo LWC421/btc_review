@@ -1,6 +1,5 @@
 import { AutoComplete, Button, Input, TextArea } from "components/common";
-import { useInput } from "hooks";
-import { useAlert } from "hooks";
+import { useInput, useToast } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as CafeSt from "pageStyles/post/cafe.style";
@@ -27,6 +26,7 @@ const dummyDistrict = [
 
 const Cafe: NextPage = () => {
   const districtItems = dummyDistrict;
+  const pushToast = useToast();
 
   const router = useRouter();
 
@@ -56,8 +56,17 @@ const Cafe: NextPage = () => {
     if (districtItems.includes(district)) {
       setDistrictList([...districtList, district]);
       setDistrict("");
+      pushToast({
+        type: "success",
+        message: `${district}지역을 추가하였습니다`,
+        time: 2000,
+      });
     } else {
-      useAlert({ type: "error", message: "존재하지 않는 지역입니다" });
+      pushToast({
+        type: "warning",
+        message: "존재하지 않는 지역입니다",
+        time: 2000,
+      });
     }
   };
 

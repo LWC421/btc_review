@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 
 const Signup: NextPage = () => {
   const router = useRouter();
+  const pushAlert = useAlert();
 
   const [isValidPasswordCheck, setIsValidPasswordCheck] =
     useState<boolean>(true);
@@ -83,12 +84,12 @@ const Signup: NextPage = () => {
     {
       onSuccess: () => {
         //회원가입 성공
-        useAlert({ type: "success", message: "회원가입을 축하합니다" });
+        pushAlert({ type: "success", message: "회원가입을 축하합니다" });
         router.push("/user/login");
       },
       onError: (error) => {
         //회원가입 실패
-        useAlert({ type: "error", message: error });
+        pushAlert({ type: "error", message: error.message });
       },
     }
   );
@@ -103,7 +104,7 @@ const Signup: NextPage = () => {
     ) {
       mutate();
     } else {
-      useAlert({ type: "error", message: "입력 정보를 확인해주세요" });
+      pushAlert({ type: "warning", message: "입력 정보를 확인해주세요" });
     }
   };
 
