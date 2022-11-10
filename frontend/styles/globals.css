@@ -44,3 +44,11 @@ input {
 textarea {
   font-family: notoLight;
 }
+
+ul,
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-family: notoLight;
+}
