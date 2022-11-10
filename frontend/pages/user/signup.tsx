@@ -83,7 +83,7 @@ const Signup: NextPage = () => {
     {
       onSuccess: () => {
         //회원가입 성공
-        useAlert({ type: "alram", message: "회원가입을 축하합니다" });
+        useAlert({ type: "success", message: "회원가입을 축하합니다" });
         router.push("/user/login");
       },
       onError: (error) => {
