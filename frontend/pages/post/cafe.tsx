@@ -1,4 +1,4 @@
-import { AutoComplete, Button, Input, TextArea } from "components/common";
+import { AutoComplete, Button, Input, Tag, TextArea } from "components/common";
 import { useInput, useToast } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -52,6 +52,15 @@ const Cafe: NextPage = () => {
 
   //지역 추가 버튼을 누를때 불릴 event
   const onClickDicstrict = () => {
+    //중복으로 추가 못하게
+    if (districtList.includes(district)) {
+      pushToast({
+        type: "warning",
+        message: "지역이 중복됩니다",
+        time: 2000,
+      });
+      return;
+    }
     //존재하는 지역에 대해서만 추가할 수 있게 만듦
     if (districtItems.includes(district)) {
       setDistrictList([...districtList, district]);
@@ -101,7 +110,7 @@ const Cafe: NextPage = () => {
           <CafeSt.Left>
             <AutoComplete
               id="district"
-              placeholder="홍대"
+              placeholder="지역명"
               label="지역"
               type="text"
               maxLength={20}
@@ -118,7 +127,7 @@ const Cafe: NextPage = () => {
             </Button>
           </CafeSt.Right>
         </CafeSt.Row>
-        {districtList}
+        <Tag value={districtList} setValue={setDistrictList} />
       </CafeSt.Form>
     </CafeSt.Wrapper>
   );
