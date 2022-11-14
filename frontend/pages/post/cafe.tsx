@@ -1,9 +1,16 @@
-import { AutoComplete, Button, Input, Tag, TextArea } from "components/common";
-import { useInput, useToast } from "hooks";
+import {
+  AutoComplete,
+  Button,
+  ImageUpload,
+  Input,
+  Tag,
+  TextArea,
+} from "components/common";
+import { useFormData, useInput, useToast } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as CafeSt from "pageStyles/post/cafe.style";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const dummyDistrict = [
   "대구",
@@ -28,6 +35,8 @@ const Cafe: NextPage = () => {
   const districtItems = dummyDistrict;
   const pushToast = useToast();
 
+  const formData = useFormData();
+
   const router = useRouter();
 
   const [name, onChangeName, _, isValidName] = useInput<string>(
@@ -49,6 +58,8 @@ const Cafe: NextPage = () => {
 
   const [district, setDistrict] = useState<string>("");
   const [districtList, setDistrictList] = useState<Array<string>>([]);
+
+  const imageRef = useRef<HTMLInputElement>(null);
 
   //지역 추가 버튼을 누를때 불릴 event
   const onClickDicstrict = () => {
@@ -79,9 +90,13 @@ const Cafe: NextPage = () => {
     }
   };
 
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <CafeSt.Wrapper>
-      <CafeSt.Form>
+      <CafeSt.Form encType="multipart/form-data" onSubmit={(e) => submit(e)}>
         {/*name, location, description, image, districts*/}
 
         <Input
@@ -114,7 +129,6 @@ const Cafe: NextPage = () => {
               label="지역"
               type="text"
               maxLength={20}
-              required={true}
               items={districtItems}
               value={district}
               setValue={setDistrict}
@@ -128,6 +142,9 @@ const Cafe: NextPage = () => {
           </CafeSt.Right>
         </CafeSt.Row>
         <Tag value={districtList} setValue={setDistrictList} />
+        <ImageUpload imageRef={imageRef} formData={formData} />
+
+        <Button type="submit" primary />
       </CafeSt.Form>
     </CafeSt.Wrapper>
   );
