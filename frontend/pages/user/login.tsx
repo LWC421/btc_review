@@ -1,20 +1,14 @@
 import * as LoginSt from "pageStyles/user/login.style";
 import { NextPage } from "next";
 import { Button, Input } from "components/common";
-import { useToast, useInput, useServerSideAuth, useTimeout } from "hooks";
+import { useToast, useInput, useServerSideAuth } from "hooks";
 import Head from "next/head";
-import { useMutation } from "react-query";
 import { loginRequest } from "api";
 import { FormEvent, useEffect } from "react";
-import { AxiosError } from "axios";
-import { LoginResponse } from "api/loginRequest";
-import { setToken } from "utils/token";
 import { useRouter } from "next/router";
 import { MyContext } from "types";
 
 const Login: NextPage = () => {
-  const pushToast = useToast();
-
   const router = useRouter();
   const [email, onChangeEmail, _, isValidEmail] = useInput<string>(
     "",
@@ -43,33 +37,7 @@ const Login: NextPage = () => {
   );
 
   let timerId: ReturnType<typeof setTimeout> | null = null;
-
-  const { mutate, isLoading, error, isSuccess } = useMutation<
-    LoginResponse,
-    AxiosError | Error
-  >(() => loginRequest({ email, password }), {
-    onSuccess: (data) => {
-      //로그인 성공
-      const { accessToken } = data;
-      setToken(accessToken);
-
-      timerId = setTimeout(() => {
-        window.location.href = "/";
-      }, 1000);
-
-      pushToast({
-        type: "success",
-        message: "로그인 성공",
-        time: 1000,
-      });
-    },
-    onError: (error) => {
-      pushToast({
-        type: "error",
-        message: error?.message ?? "로그인 실패",
-      });
-    },
-  });
+  const { mutate, isLoading } = loginRequest({ email, password });
 
   useEffect(() => {
     if (timerId !== null) {

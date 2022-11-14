@@ -2,7 +2,7 @@ import { signupRequest } from "api";
 import { AxiosError } from "axios";
 import { Button, Input } from "components/common";
 import { useInput } from "hooks";
-import { useAlert } from "hooks";
+import { useToast } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as SignupSt from "pageStyles/user/signup.style";
@@ -11,7 +11,7 @@ import { useMutation } from "react-query";
 
 const Signup: NextPage = () => {
   const router = useRouter();
-  const pushAlert = useAlert();
+  const pushToast = useToast();
 
   const [isValidPasswordCheck, setIsValidPasswordCheck] =
     useState<boolean>(true);
@@ -79,20 +79,7 @@ const Signup: NextPage = () => {
     }
   }, [password, passwordCheck]);
 
-  const { mutate, isLoading } = useMutation<void, AxiosError | Error>(
-    () => signupRequest({ email, password, nickname }),
-    {
-      onSuccess: () => {
-        //회원가입 성공
-        pushAlert({ type: "success", message: "회원가입을 축하합니다" });
-        router.push("/user/login");
-      },
-      onError: (error) => {
-        //회원가입 실패
-        pushAlert({ type: "error", message: error.message });
-      },
-    }
-  );
+  const { mutate, isLoading } = signupRequest({ email, password, nickname });
 
   const onClickSignup = (e: FormEvent) => {
     e.preventDefault();
@@ -104,7 +91,7 @@ const Signup: NextPage = () => {
     ) {
       mutate();
     } else {
-      pushAlert({ type: "warning", message: "입력 정보를 확인해주세요" });
+      pushToast({ type: "warning", message: "입력 정보를 확인해주세요" });
     }
   };
 

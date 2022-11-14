@@ -1,3 +1,3 @@
 export { default as loginRequest } from "./loginRequest";
-export { default as myInfoRequest } from "./myInfoRequest";
+export { default as postCafeRequest } from "./postCafeRequest";
 export { default as signupRequest } from "./signupRequest";
