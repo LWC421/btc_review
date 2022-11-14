@@ -17,8 +17,8 @@ const useInput = <T>(
   T,
   (e: ChangeEvent<HTMLInputElement>) => void,
   (value: T) => void,
-  boolean | null,
-  ((value: boolean) => void) | null
+  boolean,
+  (value: boolean) => void
 ] => {
   const [value, setValue] = useState<T>(initialValue);
 
@@ -44,13 +44,7 @@ const useInput = <T>(
     [callback, validation]
   );
 
-  return [
-    value,
-    onChange,
-    setValue,
-    validation ? isValid : null,
-    validation ? setIsValid : null,
-  ];
+  return [value, onChange, setValue, isValid, setIsValid];
 };
 
 export default useInput;
