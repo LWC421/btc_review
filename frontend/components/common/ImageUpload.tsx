@@ -1,14 +1,15 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Button from "./Button";
 import * as ImageUploadSt from "./ImageUpload.style";
 
 type Props = {
-  imageRef: React.MutableRefObject<HTMLInputElement | null>;
   formData: FormData | null;
 };
 
-const ImageUpload = ({ imageRef, formData }: Props) => {
+const ImageUpload = ({ formData }: Props) => {
+  const imageRef = useRef<HTMLInputElement>(null);
+
   const [preview, setPreview] = useState<string>("");
 
   const onClickUpload = () => {

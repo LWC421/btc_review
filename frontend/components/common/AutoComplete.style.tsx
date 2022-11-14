@@ -18,6 +18,8 @@ export const ItemWrapper = styled.ul<ItemWrapperProps>`
   margin: 0;
 
   position: absolute;
+
+  z-index: 999;
 `;
 
 export const Item = styled.li`
