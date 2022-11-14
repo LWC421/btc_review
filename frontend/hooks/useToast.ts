@@ -1,11 +1,11 @@
 import { AxiosError } from "axios";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import toastItemState, { ToastItem } from "recoils/toast";
 
 type Props = {
   type: "success" | "warning" | "error";
-  message: string;
+  message: React.ReactNode;
   time?: number;
 };
 

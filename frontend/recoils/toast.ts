@@ -1,8 +1,9 @@
+import React from "react";
 import { atom } from "recoil";
 
 export type ToastItem = {
   id: number;
-  message: string;
+  message: React.ReactNode;
   type: "success" | "warning" | "error";
   timerId: ReturnType<typeof setTimeout>;
 };
