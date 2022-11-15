@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDecimal, IsString } from 'class-validator';
+import { IsDecimal, IsNotEmpty, IsString } from 'class-validator';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { DistrictEntity } from 'src/districts/districts.entity';
 import { Column, Entity, Index, JoinTable, ManyToMany } from 'typeorm';
@@ -7,12 +7,14 @@ import { Column, Entity, Index, JoinTable, ManyToMany } from 'typeorm';
 @Index('name', ['name'], { unique: false })
 @Entity({ name: 'CAFE' })
 export class CafeEntity extends CommonEntity {
-  @IsString()
+  @IsString({ message: '카페명을 제대로 입력해주세요' })
+  @IsNotEmpty({ message: '카페명을 입력해주세요' })
   @Column({ type: 'varchar', length: 20, nullable: false })
   @ApiProperty({ example: '이스케이프', description: '카페명' })
   name: string;
 
-  @IsString()
+  @IsString({ message: '주소를 제대로 입력해주세요' })
+  @IsNotEmpty({ message: '주소를 입력해주세요' })
   @Column({ type: 'varchar', length: 50, nullable: false })
   @ApiProperty({
     example: '경기도 성남시 분당구 정자동 178-1',
@@ -38,7 +40,7 @@ export class CafeEntity extends CommonEntity {
   @ApiProperty({ example: 128.123456, description: '경도' })
   longitude: number;
 
-  @IsString()
+  @IsString({ message: '설명을 제대로 입력해주세요' })
   @Column({ type: 'varchar', length: 120, nullable: true })
   @ApiProperty({ example: '설명내용', description: '설명' })
   description: string;
@@ -67,5 +69,6 @@ export class CafeEntity extends CommonEntity {
       referencedColumnName: 'id',
     },
   })
+  @IsNotEmpty({ message: '최소 하나 이상의 지역이 필요합니다' })
   districts: DistrictEntity[];
 }
