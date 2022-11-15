@@ -8,8 +8,11 @@ export class ImageFilePipe
   implements PipeTransform<Express.Multer.File, Promise<string>>
 {
   async transform(image: Express.Multer.File): Promise<string> {
-    const width = 400;
-    const height = 600;
+    if (!image) {
+      //이미지가 없을 경우
+      return null;
+    }
+    const height = 640;
     const fileDir = path.join('dist', 'uploads');
 
     //https://sharp.pixelplumbing.com/api-output#webp
@@ -28,7 +31,7 @@ export class ImageFilePipe
     const filename = Date.now() + '-' + randomName + '.webp';
 
     await sharp(image.buffer)
-      .resize(width, height)
+      .resize({ height: height })
       .webp(webpOptions)
       .withMetadata() //이미지 메타정보 유지
       .toFile(path.join(fileDir, filename));
