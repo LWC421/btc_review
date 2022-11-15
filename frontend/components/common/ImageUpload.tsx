@@ -68,7 +68,7 @@ const ImageUpload = ({ formData }: Props) => {
           />
         )}
       </ImageUploadSt.PreviewWrapper>
-      <Button primary type="button" onClick={onClickUpload}>
+      <Button type="button" onClick={onClickUpload}>
         이미지 업로드
       </Button>
     </div>
