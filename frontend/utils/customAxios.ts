@@ -8,4 +8,12 @@ const customAxios: AxiosInstance = axios.create({
   },
 });
 
+export const mapAxios: AxiosInstance = axios.create({
+  baseURL: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2",
+  headers: {
+    "X-NCP-APIGW-API-KEY-ID": process.env.NEXT_PUBLIC_MAP_ID,
+    "X-NCP-APIGW-API-KEY-KEY": process.env.NEXT_PUBLIC_MAP_SECRET,
+  },
+});
+
 export default customAxios;
