@@ -1,3 +1,4 @@
+import { postCafeRequest } from "api";
 import {
   AutoComplete,
   Button,
@@ -59,8 +60,6 @@ const Cafe: NextPage = () => {
   const [district, setDistrict] = useState<string>("");
   const [districtList, setDistrictList] = useState<Array<string>>([]);
 
-  const imageRef = useRef<HTMLInputElement>(null);
-
   //지역 추가 버튼을 누를때 불릴 event
   const onClickDicstrict = () => {
     //중복으로 추가 못하게
@@ -78,7 +77,11 @@ const Cafe: NextPage = () => {
       setDistrict("");
       pushToast({
         type: "success",
-        message: `${district}지역을 추가하였습니다`,
+        message: (
+          <p>
+            <strong>{district}</strong>지역을 추가하였습니다
+          </p>
+        ),
         time: 2000,
       });
     } else {
@@ -90,8 +93,12 @@ const Cafe: NextPage = () => {
     }
   };
 
+  const { mutate, isLoading, isSuccess } = postCafeRequest(formData!);
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(formData?.has("image"));
+    mutate();
   };
 
   return (
@@ -142,9 +149,11 @@ const Cafe: NextPage = () => {
           </CafeSt.Right>
         </CafeSt.Row>
         <Tag value={districtList} setValue={setDistrictList} />
-        <ImageUpload imageRef={imageRef} formData={formData} />
+        <ImageUpload formData={formData} />
 
-        <Button type="submit" primary />
+        <Button type="submit" primary>
+          정보생성
+        </Button>
       </CafeSt.Form>
     </CafeSt.Wrapper>
   );
