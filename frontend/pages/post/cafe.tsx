@@ -52,6 +52,8 @@ const Cafe: NextPage = () => {
       }
     }
   );
+  const [location, setLocation] = useState<string>("");
+
   const [description, setDescription] = useState<string>("");
   const onChangeDescription = (e: any) => {
     setDescription(e.target.value);
@@ -97,7 +99,10 @@ const Cafe: NextPage = () => {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData?.has("image"));
+    formData?.set("name", name);
+    formData?.set("description", description);
+    formData?.set("district", JSON.stringify(districtList));
+    formData?.set("location", location);
     mutate();
   };
 
@@ -118,6 +123,7 @@ const Cafe: NextPage = () => {
           warning={!isValidName}
           warningMessage="카페명은 1글자 이상이어야합니다"
         />
+        <Input id="" />
 
         <TextArea
           id="description"
