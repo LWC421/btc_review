@@ -16,4 +16,11 @@ export const mapAxios: AxiosInstance = axios.create({
   },
 });
 
+export const kakaoAxios: AxiosInstance = axios.create({
+  baseURL: "https://dapi.kakao.com",
+  headers: {
+    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_KEY}`,
+  },
+});
+
 export default customAxios;
