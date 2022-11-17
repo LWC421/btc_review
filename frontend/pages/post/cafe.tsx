@@ -7,7 +7,7 @@ import {
   Tag,
   TextArea,
 } from "components/common";
-import { useFormData, useInput, useToast } from "hooks";
+import { useAuth, useFormData, useInput, useToast } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import * as CafeSt from "pageStyles/post/cafe.style";
@@ -33,12 +33,24 @@ const dummyDistrict = [
 ];
 
 const Cafe: NextPage = () => {
+  const router = useRouter();
+
+  const check = async () => {
+    const [isAuth] = await useAuth();
+    if (!isAuth) {
+      alert("로그인 후 사용가능합니다");
+      router.replace("/user/login");
+    }
+  };
+
+  useEffect(() => {
+    check();
+  }, []);
+
   const districtItems = dummyDistrict;
   const pushToast = useToast();
 
   const formData = useFormData();
-
-  const router = useRouter();
 
   const [name, onChangeName, _, isValidName] = useInput<string>(
     "",
